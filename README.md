@@ -12,8 +12,6 @@ Planned:
 
 Alternators (Small generators)<br />
 Pole Shoe (Sable only)<br />
-Square small lightbulbs<br />
 Voltmeters and Ampermeters with negative and positive sides to display<br />
-Square buttons<br />
 
 To be edited.
