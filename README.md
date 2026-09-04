@@ -4,16 +4,16 @@ This mod adds electric components and soon blocks to Create: PowerGrid that are 
 
 As of now, there are:
 
-Rotary switches
-Linear switches
-LV Toggle switches
+Rotary switches<br />
+Linear switches<br />
+LV Toggle switches<br />
 
 Planned:
 
-Alternators
-Pole Shoe (Sable only.)
-Square small lightbulbs
-Voltmeters and Ampermeters with negative and positive sides to display.
-Square buttons
+Alternators (Small generators)<br />
+Pole Shoe (Sable only)<br />
+Square small lightbulbs<br />
+Voltmeters and Ampermeters with negative and positive sides to display<br />
+Square buttons<br />
 
 To be edited.
