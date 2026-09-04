@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ba",
+    "aa"
+  ],
+  "key": {
+    "a": { "item": "minecraft:iron_nugget" },
+    "b": { "item":  "powergrid:lv_switch"}
+  },
+  "result": {
+    "count": 1,
+    "id": "createtrolleybusparts:rotaryswitch"
+  }
+}
