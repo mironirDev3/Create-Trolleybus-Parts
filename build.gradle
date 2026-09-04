@@ -85,9 +85,10 @@ configurations {
 
 dependencies {
     implementation "curse.maven:create-328085:7963363"
-    implementation "curse.maven:architectury-api-419699:8492726"
-    implementation files("libs/powergrid-mc1.21.1-0.6.1.jar")
     implementation("net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}")
+    implementation "curse.maven:architectury-api-419699:8492726"
+    implementation "curse.maven:power-grid-1321420:8648636"
+    implementation "curse.maven:jei-238222:8678372"
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
