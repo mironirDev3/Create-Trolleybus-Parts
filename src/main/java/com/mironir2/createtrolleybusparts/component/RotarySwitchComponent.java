@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
@@ -32,11 +34,13 @@ public class RotarySwitchComponent extends OrientableComponent implements IInter
     public static final IntProperty STATE = new IntProperty("createtrolleybusparts", "rotaryswitch_state", 1, 0, 3);
     public static final IntProperty POSITIONS = new IntProperty("createtrolleybusparts", "rotaryswitch_positions", 2, 1, 3);
 
+    @OnlyIn(Dist.CLIENT)
+    private static ValueSettingsBoard BOARD;
+
     public RotarySwitchComponent(ComponentFootprint footprint) {
         super(footprint);
     }
 
-    private static ValueSettingsBoard BOARD;
 
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
         super.addProperties(properties);
@@ -69,29 +73,33 @@ public class RotarySwitchComponent extends OrientableComponent implements IInter
         return IInteractableComponent.extrudedFootprint(placed, 0.025F);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public InteractionResult use(CircuitBoardBlockEntity be, PlacedComponent placed, Player player) {
-        placed.onClientWorld(() -> world -> {
-            var value = placed.get(STATE);
-            if (BOARD == null) {
-                BOARD = CustomValueSettingsScreen.makeBoard(
-                        Component.literal("Position"),
-                        placed.get(POSITIONS), 10,
-                        List.of(Component.literal("value")));
-            } else {
-                if (BOARD.maxValue() != placed.get(POSITIONS)) {
+        assert be.getLevel() != null;
+        if (be.getLevel().isClientSide) {
+            placed.onClientWorld(() -> world -> {
+                var value = placed.get(STATE);
+                if (BOARD == null) {
                     BOARD = CustomValueSettingsScreen.makeBoard(
                             Component.literal("Position"),
                             placed.get(POSITIONS), 10,
                             List.of(Component.literal("value")));
+                } else {
+                    if (BOARD.maxValue() != placed.get(POSITIONS)) {
+                        BOARD = CustomValueSettingsScreen.makeBoard(
+                                Component.literal("Position"),
+                                placed.get(POSITIONS), 10,
+                                List.of(Component.literal("value")));
+                    }
                 }
-            }
-            CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
-                    BOARD, new ValueSettingsBehaviour.ValueSettings(0, value), setting -> {
+                CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
+                        BOARD, new ValueSettingsBehaviour.ValueSettings(0, value), setting -> {
                     placed.set(STATE, setting.value());
                     ModdedPackets.sendToServer(new UpdateComponentBiPacket(be, placed, STATE));
                 }) {
+                });
             });
-        });
+        }
         be.setChanged();
         return InteractionResult.SUCCESS;
     }

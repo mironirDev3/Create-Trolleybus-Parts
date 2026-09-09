@@ -23,9 +23,12 @@ repositories {
     maven {
         url "https://cursemaven.com"
     }
-
-    maven { url = "https://maven.createmod.net" }
-    maven { url = "https://maven.ithundxr.dev/snapshots" }
+    maven {
+        name "createmod maven"
+        url "https://maven.createmod.net/"
+    }
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+    maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
     maven { url = "https://maven.terraformersmc.com/" }
 }
 
@@ -89,7 +92,11 @@ dependencies {
     implementation "curse.maven:architectury-api-419699:8492726"
     implementation "curse.maven:power-grid-1321420:8648636"
     implementation "curse.maven:jei-238222:8678372"
+    compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
+    runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")
+    implementation("com.tterrag.registrate:Registrate:${registrate_version}")
 }
+
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [

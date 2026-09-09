@@ -7,7 +7,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.registries.RegisterEvent;
-import org.patryk3211.powergrid.circuits.components.Component;
 import org.patryk3211.powergrid.circuits.components.ComponentRegistry;
 import org.patryk3211.powergrid.circuits.schematic.ComponentFootprint;
 
@@ -21,7 +20,7 @@ public class ModComponents {
                 .addPad(4, 2, 3, "Position 2", "P2")
                 .addPad(4, 4, 4, "Position 3", "P3")
                 .withItem().withOutline().build();
-        return  new RotarySwitchComponent(footprint);
+        return new RotarySwitchComponent(footprint);
     }
     private static LinearButtonComponent buildLinearButton() {
         ComponentFootprint footprint = (new ComponentFootprint.Builder(5, 4, "component.createtrolleybusparts.linearbutton", null))
@@ -32,7 +31,7 @@ public class ModComponents {
                 .addPad(0, 0, 4, "Normally Open P", "NOP")
                 .addPad(4, 0, 5, "Normally Open L", "NOL")
                 .withItem().withOutline().build();
-        return  new LinearButtonComponent(footprint);
+        return new LinearButtonComponent(footprint);
     }
 
     private static LVToggleComponent buildLVToggle() {
@@ -46,16 +45,19 @@ public class ModComponents {
 
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
-        if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY))
+        if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY)) {
             return;
-        register(event, "rotaryswitch", (Component)buildRotarySwitch());
-        register(event, "linearbutton", (Component)buildLinearButton());
-        register(event, "lvtoggle", (Component)buildLVToggle());
+        }
+        register(event, "rotaryswitch", buildRotarySwitch());
+        register(event, "linearbutton", buildLinearButton());
+        register(event, "lvtoggle", buildLVToggle());
     }
 
-    private static void register(RegisterEvent event, String id, Component component) {
-        event.register(ComponentRegistry.REGISTRY_KEY,
-
-                ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", id), () -> component);
+    private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {
+        event.register(
+                ComponentRegistry.REGISTRY_KEY,
+                ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", id),
+                () -> component
+        );
     }
 }

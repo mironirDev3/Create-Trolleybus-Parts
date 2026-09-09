@@ -8,6 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 import org.patryk3211.powergrid.circuits.circuitboard.CircuitBoardBlockEntity;
 import org.patryk3211.powergrid.circuits.circuitboard.ComponentCircuitBuilder;
@@ -34,6 +36,7 @@ public class LVToggleComponent extends OrientableComponent implements IInteracta
         super(footprint);
     }
 
+    @OnlyIn(Dist.CLIENT)
     private static ValueSettingsBoard BOARD;
 
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
@@ -60,6 +63,7 @@ public class LVToggleComponent extends OrientableComponent implements IInteracta
         return IInteractableComponent.extrudedFootprint(placed, 0.025F);
     }
 
+    @OnlyIn(Dist.CLIENT)
     public InteractionResult use(CircuitBoardBlockEntity be, PlacedComponent placed, Player player) {
         placed.onClientWorld(() -> world -> {
             var value = placed.get(STATE);

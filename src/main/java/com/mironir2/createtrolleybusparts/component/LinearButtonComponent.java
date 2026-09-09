@@ -1,7 +1,6 @@
 package com.mironir2.createtrolleybusparts.component;
 
 import com.google.common.collect.ImmutableCollection;
-import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -113,8 +112,7 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
             if (placed.get(FIXED) == false) {
                 if (state > 0) {
                     state--;
-                } else
-                if (state < 0) {
+                } else {
                     state++;
                 }
             }
@@ -125,17 +123,17 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
             }
         }
         if (!placed.wires.isEmpty()) {
-            if (placed.get(STATE).intValue() < 0) {
+            if (placed.get(STATE) < 0) {
                 ((SwitchedWire)placed.wires.get(0)).setState(false);
                 ((SwitchedWire)placed.wires.get(1)).setState(true);
                 ((SwitchedWire)placed.wires.get(2)).setState(false);
                 ((SwitchedWire)placed.wires.get(3)).setState(true);
-            } else if (placed.get(STATE).intValue() == 0) {
+            } else if (placed.get(STATE) == 0) {
                 ((SwitchedWire)placed.wires.get(0)).setState(false);
                 ((SwitchedWire)placed.wires.get(1)).setState(false);
                 ((SwitchedWire)placed.wires.get(2)).setState(false);
                 ((SwitchedWire)placed.wires.get(3)).setState(false);
-            } else if (placed.get(STATE).intValue() > 0) {
+            } else if (placed.get(STATE) > 0) {
                 ((SwitchedWire)placed.wires.get(0)).setState(true);
                 ((SwitchedWire)placed.wires.get(1)).setState(false);
                 ((SwitchedWire)placed.wires.get(2)).setState(true);
@@ -153,13 +151,13 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
 
     @NotNull
     public ResourceLocation getModelId(@NotNull PlacedComponent component) {
-        if (component.get(STATE).intValue() < 0) {
+        if (component.get(STATE) < 0) {
             return ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", "linearbutton_l");
-        } else if (component.get(STATE).intValue() == 0) {
+        } else if (component.get(STATE) == 0) {
             return ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", "linearbutton_n");
-        } else if (component.get(STATE).intValue() > 0) {
+        } else if (component.get(STATE) > 0) {
             return ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", "linearbutton_p");
-        };
+        }
         return ResourceLocation.fromNamespaceAndPath("createtrolleybusparts", "linearbutton");
     }
 

@@ -15,6 +15,5 @@ public class ModItems {
 
     public static final DeferredHolder<Item, Item> LV_TOGGLE = ITEMS
             .registerSimpleItem("lvtoggle", new Item.Properties());
-
 }
 
