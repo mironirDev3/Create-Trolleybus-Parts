@@ -25,8 +25,8 @@ import java.util.List;
 public class LinearButtonComponent extends OrientableComponent implements IInteractableComponent {
 
     public static final IntProperty STATE = (IntProperty) new IntProperty("createtrolleybusparts", "linearbutton_state", 0, -15, 15).hidden();
-    public static final BooleanProperty CANPULL = new BooleanProperty("createtrolleybusparts", "linearbutton_canpull");
-    public static final BooleanProperty CANPUSH = new BooleanProperty("createtrolleybusparts", "linearbutton_canpush");
+    public static final BooleanProperty BLOCKPUSH = new BooleanProperty("createtrolleybusparts", "linearbutton_blockpulling");
+    public static final BooleanProperty BLOCKPULL = new BooleanProperty("createtrolleybusparts", "linearbutton_blockpushing");
     public static final BooleanProperty FIXED = new BooleanProperty("createtrolleybusparts", "linearbutton_fixed");
 
     public LinearButtonComponent(ComponentFootprint footprint) {
@@ -36,8 +36,8 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
         super.addProperties(properties);
         properties.add(STATE);
-        properties.add(CANPULL);
-        properties.add(CANPUSH);
+        properties.add(BLOCKPUSH);
+        properties.add(BLOCKPULL);
         properties.add(FIXED);
         properties.add(current(6.0F));
     }
@@ -71,13 +71,13 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
     @Override
     public InteractionResult use(CircuitBoardBlockEntity circuitBoardBlockEntity, PlacedComponent placed, Player player) {
         if (placed.get(FIXED) == false) {
-            if((placed.get(STATE) == 0 || placed.get(STATE) < 5) && !player.isCrouching() && placed.get(CANPUSH) == true) {
+            if((placed.get(STATE) == 0 || placed.get(STATE) < 5) && !player.isCrouching() && placed.get(BLOCKPUSH) == false) {
                 if (placed.get(STATE) == 0) {
                     placed.onServerWorld(() -> world -> ModdedSoundEvents.MICROBUTTON_ON.playOnServer(world, placed.getPos()));
                 }
                 placed.onClientWorld(() -> world -> modelChanged(placed.getPos()));
                 placed.set(STATE, 10);
-            } else if((placed.get(STATE) == 0 || placed.get(STATE) > -5) && player.isCrouching() && placed.get(CANPULL) == true) {
+            } else if((placed.get(STATE) == 0 || placed.get(STATE) > -5) && player.isCrouching() && placed.get(BLOCKPULL) == false) {
                 if (placed.get(STATE) == 0) {
                     placed.onServerWorld(() -> world -> ModdedSoundEvents.MICROBUTTON_ON.playOnServer(world, placed.getPos()));
                 }
@@ -88,13 +88,13 @@ public class LinearButtonComponent extends OrientableComponent implements IInter
         if(placed.get(FIXED) == true) {
             var state = placed.get(STATE);
             if (!player.isCrouching() && state < 1) {
-                if (placed.get(CANPUSH) || state < 0) {
+                if (!placed.get(BLOCKPUSH) || state < 0) {
                     placed.onServerWorld(() -> world -> ModdedSoundEvents.MICROBUTTON_ON.playOnServer(world, placed.getPos()));
                     placed.onClientWorld(() -> world -> modelChanged(placed.getPos()));
                     placed.set(STATE, state + 1);
                 }
             } else if (player.isCrouching() && state > -1) {
-                if (placed.get(CANPULL) || state > 0) {
+                if (!placed.get(BLOCKPULL) || state > 0) {
                     placed.onServerWorld(() -> world -> ModdedSoundEvents.MICROBUTTON_ON.playOnServer(world, placed.getPos()));
                     placed.onClientWorld(() -> world -> modelChanged(placed.getPos()));
                     placed.set(STATE, state - 1);

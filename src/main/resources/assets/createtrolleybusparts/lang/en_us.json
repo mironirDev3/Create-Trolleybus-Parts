@@ -38,5 +38,11 @@
   "component.createtrolleybusparts.lvtoggle.2.short": "NO",
 
   "createtrolleybusparts.component.property.rotaryswitch_state": "State",
-  "createtrolleybusparts.component.property.rotaryswitch_positions": "Positions"
+  "createtrolleybusparts.component.property.rotaryswitch_positions": "Positions",
+
+  "createtrolleybusparts.component.property.linearbutton_blockpulling": "Block pulling",
+  "createtrolleybusparts.component.property.linearbutton_blockpushing": "Block pushing",
+  "createtrolleybusparts.component.property.linearbutton_fixed": "Remove returning",
+
+  "createtrolleybusparts.component.property.lvtoggle_state": "State"
 }
