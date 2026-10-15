@@ -1,5 +1,6 @@
 package com.mironir2.createtrolleybusparts.registry;
 
+import com.mironir2.createtrolleybusparts.component.BlinkerRelayComponent;
 import com.mironir2.createtrolleybusparts.component.LVToggleComponent;
 import com.mironir2.createtrolleybusparts.component.LinearButtonComponent;
 import com.mironir2.createtrolleybusparts.component.RotarySwitchComponent;
@@ -43,6 +44,15 @@ public class ModComponents {
         return  new LVToggleComponent(footprint);
     }
 
+    private static BlinkerRelayComponent buildBlinkerRelay() {
+        ComponentFootprint footprint = (new ComponentFootprint.Builder(3, 3, "component.createtrolleybusparts.blinkerrelay", null))
+                .addPad(1, 0, 0, "Common", "COM")
+                .addPad(0, 2, 1, "Voltage In", "VIN")
+                .addPad(2, 2, 2, "Voltage Out", "VOUT")
+                .withItem().withOutline().build();
+        return  new BlinkerRelayComponent(footprint);
+    }
+
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
         if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY)) {
@@ -51,6 +61,7 @@ public class ModComponents {
         register(event, "rotaryswitch", buildRotarySwitch());
         register(event, "linearbutton", buildLinearButton());
         register(event, "lvtoggle", buildLVToggle());
+        register(event, "blinkerrelay", buildBlinkerRelay());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {

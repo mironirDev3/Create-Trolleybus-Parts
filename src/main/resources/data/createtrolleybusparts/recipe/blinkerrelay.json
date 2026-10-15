@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "ba"
+  ],
+  "key": {
+    "a": { "item": "powergrid:capacitor" },
+    "b": { "item":  "powergrid:relay"}
+  },
+  "result": {
+    "count": 1,
+    "id": "createtrolleybusparts:blinkerrelay"
+  }
+}

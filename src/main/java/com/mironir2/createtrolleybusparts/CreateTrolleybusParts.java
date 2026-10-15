@@ -1,10 +1,12 @@
 package com.mironir2.createtrolleybusparts;
 
+import com.mironir2.createtrolleybusparts.registry.ModBlocks;
 import com.mironir2.createtrolleybusparts.registry.ModItems;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -18,17 +20,19 @@ public class CreateTrolleybusParts {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_MODE_TAB = CREATIVE_MODE_TABS.register("createtrolleybusparts", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.createtrolleybusparts"))
-            .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> ModItems.ROTARY_SWITCH.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(ModItems.ROTARY_SWITCH.get());
                 output.accept(ModItems.LINEAR_BUTTON.get());
                 output.accept(ModItems.LV_TOGGLE.get());
+                output.accept(ModItems.BLINKER_RELAY.get());
             }).build());
 
     public CreateTrolleybusParts(IEventBus modBus) {
         ModItems.ITEMS.register(modBus);
+        ModBlocks.BLOCKS.register(modBus);
         CREATIVE_MODE_TABS.register(modBus);
+
     }
 
 }

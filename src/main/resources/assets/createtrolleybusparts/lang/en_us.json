@@ -3,6 +3,7 @@
   "item.createtrolleybusparts.rotaryswitch": "Rotary Switch",
   "item.createtrolleybusparts.linearbutton": "Linear Button",
   "item.createtrolleybusparts.lvtoggle": "LV toggle",
+  "item.createtrolleybusparts.blinkerrelay": "Blinker Relay",
 
   "component.createtrolleybusparts.rotaryswitch.0": "Common",
   "component.createtrolleybusparts.rotaryswitch.1": "Position Off",
@@ -30,6 +31,10 @@
   "component.createtrolleybusparts.linearbutton.4.short": "NO",
   "component.createtrolleybusparts.linearbutton.5.short": "NO",
 
+  "createtrolleybusparts.component.property.linearbutton_blockpulling": "Block pulling",
+  "createtrolleybusparts.component.property.linearbutton_blockpushing": "Block pushing",
+  "createtrolleybusparts.component.property.linearbutton_fixed": "Remove returning",
+
   "component.createtrolleybusparts.lvtoggle.0": "Common",
   "component.createtrolleybusparts.lvtoggle.1": "Normally Open",
   "component.createtrolleybusparts.lvtoggle.2": "Normally Open",
@@ -40,9 +45,15 @@
   "createtrolleybusparts.component.property.rotaryswitch_state": "State",
   "createtrolleybusparts.component.property.rotaryswitch_positions": "Positions",
 
-  "createtrolleybusparts.component.property.linearbutton_blockpulling": "Block pulling",
-  "createtrolleybusparts.component.property.linearbutton_blockpushing": "Block pushing",
-  "createtrolleybusparts.component.property.linearbutton_fixed": "Remove returning",
+  "createtrolleybusparts.component.property.lvtoggle_state": "State",
 
-  "createtrolleybusparts.component.property.lvtoggle_state": "State"
+  "component.createtrolleybusparts.blinkerrelay.0.short": "COM",
+  "component.createtrolleybusparts.blinkerrelay.1.short": "VIN",
+  "component.createtrolleybusparts.blinkerrelay.2.short": "NO",
+
+  "component.createtrolleybusparts.blinkerrelay.0": "Common",
+  "component.createtrolleybusparts.blinkerrelay.1": "Voltage In",
+  "component.createtrolleybusparts.blinkerrelay.2": "Normally Open",
+
+  "createtrolleybusparts.component.property.blinkerrelay_blinktime": "Blink time (in ticks)"
 }

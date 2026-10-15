@@ -3,6 +3,7 @@
   "values": [
     "createtrolleybusparts:rotaryswitch",
     "createtrolleybusparts:linearbutton",
-    "createtrolleybusparts:lvtoggle"
+    "createtrolleybusparts:lvtoggle",
+    "createtrolleybusparts:blinkerrelay"
   ]
 }
