@@ -7,6 +7,7 @@ As of now, there are:
 Rotary switches<br />
 Linear switches<br />
 LV Toggle switches<br />
+Blinker Relays<br />
 
 Planned:
 
