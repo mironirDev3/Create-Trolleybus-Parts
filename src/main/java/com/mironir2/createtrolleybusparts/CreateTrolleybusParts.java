@@ -1,9 +1,8 @@
 package com.mironir2.createtrolleybusparts;
 
+import com.mironir2.createtrolleybusparts.registry.ModBlockEntityTypes;
 import com.mironir2.createtrolleybusparts.registry.ModBlocks;
 import com.mironir2.createtrolleybusparts.registry.ModItems;
-import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -31,6 +30,8 @@ public class CreateTrolleybusParts {
     public CreateTrolleybusParts(IEventBus modBus) {
         ModItems.ITEMS.register(modBus);
         ModBlocks.BLOCKS.register(modBus);
+        ModBlocks.BlockCreateRegistry.registerEventListeners(modBus);
+        ModBlockEntityTypes.register();
         CREATIVE_MODE_TABS.register(modBus);
 
     }
