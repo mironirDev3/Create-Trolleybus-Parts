@@ -23,19 +23,19 @@ import org.patryk3211.powergrid.circuits.thermal.ThermalBuilder;
 import org.patryk3211.powergrid.collections.ModdedPackets;
 import org.patryk3211.powergrid.electricity.sim.SwitchedWire;
 import org.patryk3211.powergrid.network.packets.UpdateComponentBiPacket;
-import org.patryk3211.powergrid.utility.CustomValueSettingsScreen;
 import net.minecraft.network.chat.Component;
 
 import java.util.Collection;
 import java.util.List;
+
+import org.patryk3211.powergrid.utility.CustomValueSettingsScreen;
 
 public class RotarySwitchComponent extends OrientableComponent implements IInteractableComponent {
 
     public static final IntProperty STATE = new IntProperty("createtrolleybusparts", "rotaryswitch_state", 1, 0, 3);
     public static final IntProperty POSITIONS = new IntProperty("createtrolleybusparts", "rotaryswitch_positions", 2, 1, 3);
 
-    @OnlyIn(Dist.CLIENT)
-    private static ValueSettingsBoard BOARD;
+    private static Object BOARD;
 
     public RotarySwitchComponent(ComponentFootprint footprint) {
         super(footprint);
@@ -73,35 +73,40 @@ public class RotarySwitchComponent extends OrientableComponent implements IInter
         return IInteractableComponent.extrudedFootprint(placed, 0.025F);
     }
 
-    @OnlyIn(Dist.CLIENT)
+    @Override
     public InteractionResult use(CircuitBoardBlockEntity be, PlacedComponent placed, Player player) {
         assert be.getLevel() != null;
-        if (be.getLevel().isClientSide) {
-            placed.onClientWorld(() -> world -> {
-                var value = placed.get(STATE);
-                if (BOARD == null) {
+        if (player.level().isClientSide()) {
+            openClientScreen(be, placed);
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void openClientScreen(CircuitBoardBlockEntity be, PlacedComponent placed) {
+        placed.onClientWorld(() -> world -> {
+            var value = placed.get(STATE);
+            if (BOARD == null) {
+                BOARD = CustomValueSettingsScreen.makeBoard(
+                        Component.literal("Position"),
+                        placed.get(POSITIONS), 10,
+                        List.of(Component.literal("value")));
+            } else {
+                if (((ValueSettingsBoard) BOARD).maxValue() != placed.get(POSITIONS)) {
                     BOARD = CustomValueSettingsScreen.makeBoard(
                             Component.literal("Position"),
                             placed.get(POSITIONS), 10,
                             List.of(Component.literal("value")));
-                } else {
-                    if (BOARD.maxValue() != placed.get(POSITIONS)) {
-                        BOARD = CustomValueSettingsScreen.makeBoard(
-                                Component.literal("Position"),
-                                placed.get(POSITIONS), 10,
-                                List.of(Component.literal("value")));
-                    }
                 }
-                CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
-                        BOARD, new ValueSettingsBehaviour.ValueSettings(0, value), setting -> {
-                    placed.set(STATE, setting.value());
-                    ModdedPackets.sendToServer(new UpdateComponentBiPacket(be, placed, STATE));
-                }) {
-                });
+            }
+            CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
+                    (ValueSettingsBoard) BOARD, new ValueSettingsBehaviour.ValueSettings(0, value), setting -> {
+                placed.set(STATE, setting.value());
+                ModdedPackets.sendToServer(new UpdateComponentBiPacket(be, placed, STATE));
+            }) {
             });
-        }
+        });
         be.setChanged();
-        return InteractionResult.SUCCESS;
     }
 
     @Override

@@ -36,8 +36,7 @@ public class LVToggleComponent extends OrientableComponent implements IInteracta
         super(footprint);
     }
 
-    @OnlyIn(Dist.CLIENT)
-    private static ValueSettingsBoard BOARD;
+    private static Object BOARD;
 
     protected void addProperties(ImmutableCollection.Builder<ComponentProperty<?>> properties) {
         super.addProperties(properties);
@@ -63,25 +62,31 @@ public class LVToggleComponent extends OrientableComponent implements IInteracta
         return IInteractableComponent.extrudedFootprint(placed, 0.025F);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public InteractionResult use(CircuitBoardBlockEntity be, PlacedComponent placed, Player player) {
-        placed.onClientWorld(() -> world -> {
-            var value = placed.get(STATE);
-            if (BOARD == null) {
-                BOARD = CustomValueSettingsScreen.makeBoard(
-                        Component.literal("Position"),
-                        2, 10,
-                        List.of(Component.literal("value")));
-            }
-            CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
-                    BOARD, new ValueSettingsBehaviour.ValueSettings(0, value+1), setting -> {
-                    placed.set(STATE, setting.value()-1);
-                    ModdedPackets.sendToServer(new UpdateComponentBiPacket(be, placed, STATE));
-                }) {
-            });
-        });
+       if (placed.isClient()) {
+           placed.onClientWorld(() -> world -> {
+               OpenScreen(be, placed);
+           });
+       }
         be.setChanged();
         return InteractionResult.SUCCESS;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public void OpenScreen(CircuitBoardBlockEntity be, PlacedComponent placed) {
+        var value = placed.get(STATE);
+        if (BOARD == null) {
+            BOARD = CustomValueSettingsScreen.makeBoard(
+                    Component.literal("Position"),
+                    2, 10,
+                    List.of(Component.literal("value")));
+        }
+        CustomValueSettingsScreen.beginInteraction(() -> new CustomValueSettingsScreen(be.getBlockPos(),
+                (ValueSettingsBoard) BOARD, new ValueSettingsBehaviour.ValueSettings(0, value+1), setting -> {
+            placed.set(STATE, setting.value()-1);
+            ModdedPackets.sendToServer(new UpdateComponentBiPacket(be, placed, STATE));
+        }) {
+        });
     }
 
     @Override
