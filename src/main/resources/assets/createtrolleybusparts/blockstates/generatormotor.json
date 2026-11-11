@@ -1,26 +1,26 @@
 {
   "variants": {
     "facing=down": {
-      "model": "powergrid:block/electric_motor/block_vertical",
+      "model": "createtrolleybusparts:block/generatormotor",
       "x": 90
     },
     "facing=east": {
-      "model": "powergrid:block/electric_motor/block",
+      "model": "createtrolleybusparts:block/generatormotor",
       "y": 90
     },
     "facing=north": {
-      "model": "powergrid:block/electric_motor/block"
+      "model": "createtrolleybusparts:block/generatormotor"
     },
     "facing=south": {
-      "model": "powergrid:block/electric_motor/block",
+      "model": "createtrolleybusparts:block/generatormotor",
       "y": 180
     },
     "facing=up": {
-      "model": "powergrid:block/electric_motor/block_vertical",
+      "model": "createtrolleybusparts:block/generatormotor",
       "x": -90
     },
     "facing=west": {
-      "model": "powergrid:block/electric_motor/block",
+      "model": "createtrolleybusparts:block/generatormotor",
       "y": -90
     }
   }

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createtrolleybusparts:block/biggeneratormotor",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "createtrolleybusparts:block/biggeneratormotor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "createtrolleybusparts:block/biggeneratormotor"
+    },
+    "facing=south": {
+      "model": "createtrolleybusparts:block/biggeneratormotor",
+      "y": 180
+    },
+    "facing=up": {
+      "model": "createtrolleybusparts:block/biggeneratormotor",
+      "x": -90
+    },
+    "facing=west": {
+      "model": "createtrolleybusparts:block/biggeneratormotor",
+      "y": -90
+    }
+  }
+}

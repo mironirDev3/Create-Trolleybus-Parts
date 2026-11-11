@@ -25,12 +25,12 @@ public class MotorGeneratorBlock extends ElectricKineticBlock implements IBE<Mot
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
 
-    private static final VoxelShape SHAPE = box(1, 0, 2, 15, 14, 14);
+    private static final VoxelShape SHAPE = box(0, 0, 0, 16, 16, 16);
 
     private static final TerminalBoundingBox[] TERMINALS = new TerminalBoundingBox[] {
-            new TerminalBoundingBox(IDecoratedTerminal.POSITIVE, 5, 13, 14, 7, 14, 16)
+            new TerminalBoundingBox(IDecoratedTerminal.POSITIVE, 2, 14, 13, 4, 16, 16)
                     .withColor(IDecoratedTerminal.RED),
-            new TerminalBoundingBox(IDecoratedTerminal.NEGATIVE, 9, 13, 14, 11, 14, 16)
+            new TerminalBoundingBox(IDecoratedTerminal.NEGATIVE, 12, 14, 13, 14, 16, 16)
                     .withColor(IDecoratedTerminal.BLUE)
     };
 

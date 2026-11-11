@@ -4,6 +4,7 @@
     "createtrolleybusparts:rotaryswitch",
     "createtrolleybusparts:linearbutton",
     "createtrolleybusparts:lvtoggle",
-    "createtrolleybusparts:blinkerrelay"
+    "createtrolleybusparts:blinkerrelay",
+    "createtrolleybusparts:rheostat"
   ]
 }

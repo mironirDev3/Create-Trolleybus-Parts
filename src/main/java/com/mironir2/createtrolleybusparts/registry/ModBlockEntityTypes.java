@@ -1,5 +1,6 @@
 package com.mironir2.createtrolleybusparts.registry;
 
+import com.mironir2.createtrolleybusparts.blockentity.BigMotorGeneratorBlockEntity;
 import com.mironir2.createtrolleybusparts.blockentity.MotorGeneratorBlockEntity;
 import com.simibubi.create.content.kinetics.base.ShaftRenderer;
 import com.simibubi.create.content.kinetics.base.ShaftVisual;
@@ -11,6 +12,15 @@ public class ModBlockEntityTypes {
             // visual for flywheel renderer
             .visual(() -> ShaftVisual::new)
             .validBlock(ModBlocks.GeneratorMotor)
+            // fallback renderer if flywheel is not available
+            .renderer(() -> ShaftRenderer::new)
+            .register();
+
+    public static final BlockEntityEntry<BigMotorGeneratorBlockEntity> BigGeneratorMotor = ModBlocks.BlockCreateRegistry
+            .blockEntity("biggeneratormotor_kinetic", BigMotorGeneratorBlockEntity::new)
+            // visual for flywheel renderer
+            .visual(() -> ShaftVisual::new)
+            .validBlock(ModBlocks.BigGeneratorMotor)
             // fallback renderer if flywheel is not available
             .renderer(() -> ShaftRenderer::new)
             .register();

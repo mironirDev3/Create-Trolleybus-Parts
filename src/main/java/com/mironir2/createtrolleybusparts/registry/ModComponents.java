@@ -1,9 +1,6 @@
 package com.mironir2.createtrolleybusparts.registry;
 
-import com.mironir2.createtrolleybusparts.component.BlinkerRelayComponent;
-import com.mironir2.createtrolleybusparts.component.LVToggleComponent;
-import com.mironir2.createtrolleybusparts.component.LinearButtonComponent;
-import com.mironir2.createtrolleybusparts.component.RotarySwitchComponent;
+import com.mironir2.createtrolleybusparts.component.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -53,6 +50,16 @@ public class ModComponents {
         return  new BlinkerRelayComponent(footprint);
     }
 
+    private static RheostatComponent buildRheostat() {
+        ComponentFootprint footprint = (new ComponentFootprint.Builder(5, 5, "component.createtrolleybusparts.rheostat", null))
+                .addPad(0, 0, 0, "Common", "COM")
+                .addPad(4, 0, 1, "Position Off", "POff")
+                .addPad(4, 4, 2, "Position 1", "P1")
+                .addPad(0, 4, 3, "Position 2", "P2")
+                .withItem().withOutline().build();
+        return new RheostatComponent(footprint);
+    }
+
     @SubscribeEvent
     public static void onRegister(RegisterEvent event) {
         if (!event.getRegistryKey().equals(ComponentRegistry.REGISTRY_KEY)) {
@@ -62,6 +69,7 @@ public class ModComponents {
         register(event, "linearbutton", buildLinearButton());
         register(event, "lvtoggle", buildLVToggle());
         register(event, "blinkerrelay", buildBlinkerRelay());
+        register(event, "rheostat", buildRheostat());
     }
 
     private static void register(RegisterEvent event, String id, org.patryk3211.powergrid.circuits.components.Component component) {

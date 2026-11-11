@@ -4,6 +4,9 @@
   "item.createtrolleybusparts.linearbutton": "Linear Button",
   "item.createtrolleybusparts.lvtoggle": "LV toggle",
   "item.createtrolleybusparts.blinkerrelay": "Blinker Relay",
+  "item.createtrolleybusparts.rheostat": "Rheostat",
+  "block.createtrolleybusparts.generatormotor": "Generator",
+  "block.createtrolleybusparts.biggeneratormotor": "Big generator",
 
   "component.createtrolleybusparts.rotaryswitch.0": "Common",
   "component.createtrolleybusparts.rotaryswitch.1": "Position Off",
@@ -55,5 +58,16 @@
   "component.createtrolleybusparts.blinkerrelay.1": "Voltage In",
   "component.createtrolleybusparts.blinkerrelay.2": "Normally Open",
 
-  "createtrolleybusparts.component.property.blinkerrelay_blinktime": "Blink time (in ticks)"
+  "component.createtrolleybusparts.rheostat.0": "",
+  "component.createtrolleybusparts.rheostat.1": "",
+  "component.createtrolleybusparts.rheostat.2": "Varistor",
+  "component.createtrolleybusparts.rheostat.3": "Varistor",
+  "component.createtrolleybusparts.rheostat.0.short": "",
+  "component.createtrolleybusparts.rheostat.1.short": "",
+  "component.createtrolleybusparts.rheostat.2.short": "VAR",
+  "component.createtrolleybusparts.rheostat.3.short": "VAR",
+
+  "createtrolleybusparts.component.property.blinkerrelay_blinktime": "Blink time (in ticks)",
+
+  "createtrolleybusparts.component.property.rheostat_resistance": "Resistance"
 }

@@ -25,6 +25,7 @@ public class CreateTrolleybusParts {
                 output.accept(ModItems.LINEAR_BUTTON.get());
                 output.accept(ModItems.LV_TOGGLE.get());
                 output.accept(ModItems.BLINKER_RELAY.get());
+                output.accept(ModItems.RHEOSTAT.get());
             }).build());
 
     public CreateTrolleybusParts(IEventBus modBus) {

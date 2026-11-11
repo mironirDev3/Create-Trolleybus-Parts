@@ -21,10 +21,8 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> BLINKER_RELAY = ITEMS
             .registerSimpleItem("blinkerrelay", new Item.Properties());
 
-    public static final ItemEntry<Item> GENERATOR_MOTOR = ModBlocks.BlockCreateRegistry
-            .item("generator_motor", Item::new)
-            .model((c, p) -> p.generated(c::getEntry, ResourceLocation.withDefaultNamespace("item/amethyst_shard")))
-            .register();
+    public static final DeferredHolder<Item, Item> RHEOSTAT = ITEMS
+            .registerSimpleItem("rheostat", new Item.Properties());
 
 }
 
