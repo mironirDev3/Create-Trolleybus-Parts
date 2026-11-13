@@ -5,11 +5,17 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import org.patryk3211.powergrid.PowerGrid;
 import org.patryk3211.powergrid.electricity.base.IElectricEntity;
 import org.patryk3211.powergrid.electricity.sim.ElectricWire;
 import org.patryk3211.powergrid.electricity.sim.node.ProvidedVoltageSourceCoupling;
+import org.patryk3211.powergrid.electricity.wire.BlockWireRenderer;
+import org.patryk3211.powergrid.electricity.wire.HangingWireRenderer;
+import org.patryk3211.powergrid.electricity.wire.WireConnection;
+import org.patryk3211.powergrid.electricity.wire.registry.WireRegistry;
 import org.patryk3211.powergrid.kinetics.base.ElectricKineticBlockEntity;
 
 
@@ -42,7 +48,7 @@ public class MotorGeneratorBlockEntity extends ElectricKineticBlockEntity {
             if (Math.abs(RPM) > 0.5f) {
                 return Math.clamp(RPM, -99999, 99999)/2.5f;
             } else {
-                return 0;
+                return 0.001;
             }
         }
 
@@ -51,7 +57,7 @@ public class MotorGeneratorBlockEntity extends ElectricKineticBlockEntity {
         float W = 250;
         float R = V * V / (2 * W);
         if(W <= 0 || R <= 0)
-            return 1000;
+            return 0;
         return R;
     }
 
