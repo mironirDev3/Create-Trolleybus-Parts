@@ -48,7 +48,7 @@ public class MotorGeneratorBlockEntity extends ElectricKineticBlockEntity {
             if (Math.abs(RPM) > 0.5f) {
                 return Math.clamp(RPM, -99999, 99999)/2.5f;
             } else {
-                return 0.001;
+                return 0.001f;
             }
         }
 

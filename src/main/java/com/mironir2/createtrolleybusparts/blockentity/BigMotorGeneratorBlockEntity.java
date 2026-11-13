@@ -62,7 +62,7 @@ public class BigMotorGeneratorBlockEntity extends ElectricKineticBlockEntity {
         if (Math.abs(RPM) > 0.5f) {
             return (float) Math.clamp((Math.clamp(RPM, -99999, 99999) *(Math.clamp(Math.abs(shuntwire.current()), 0.001, 100)*1.5)), -950, 950);
         } else {
-            return 0.001;
+            return 0.001f;
         }
     }
 
